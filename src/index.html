@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="style/gaia-icons/gaia-icons.css">
+  <link rel="stylesheet" href="style/gaia-icons/bidi-helper.css">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/statusbar.css">
+  <link rel="stylesheet" href="style/controller.css">
+  <link rel="stylesheet" href="style/overlay_menu.css">
+  <link rel="stylesheet" href="style/views.css">
+  <link rel="stylesheet" href="style/home.css">
+
+  <script src="lib/gamecontroller.js"></script>
+  <script defer src="js/statusbar.js"></script>
+  <script defer src="js/controller.js"></script>
+  <script defer src="js/overlay_menu.js"></script>
+  <script defer src="js/views.js"></script>
+  <script defer src="js/home.js"></script>
+  <script defer src="js/webstore.js"></script>
+
+  <!-- Localization -->
+  <script src="js/l10n.js"></script>
+  <meta name="defaultLanguage" content="en-US">
+  <meta name="availableLanguages" content="af, ar, da, de, el, en-US, es, fi, fr, ga, he, hi, hu, id, ja, ko, ku, lv, nl, no, pt, zh">
+  <link rel="localization" href="locales/main.{locale}.properties">
+</head>
+<body>
+  <div id="screen">
+    <div id="statusbar">
+      <div class="statusbar">
+        <div id="statusbar-time"></div>
+        <div data-icon="battery-70"></div>
+        <div data-icon="wifi"></div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="views">
+        <div id="home" class="view">
+          <div id="home-installed"></div>
+        </div>
+        <webview id="webstore" class="view"></webview>
+      </div>
+
+      <div id="overlay-menu">
+        <div id="overlay-menu-options">
+          <header data-l10n-id="overlayMenu"></header>
+          <ul>
+            <li id="overlay-menu-home" data-icon="home" data-l10n-id="overlayMenu-home"></li>
+            <li id="overlay-menu-webstore" data-icon="shopping-cart" data-l10n-id="overlayMenu-webstore"></li>
+            <li id="overlay-menu-browser" data-icon="web" data-l10n-id="overlayMenu-browser"></li>
+            <li id="overlay-menu-media" data-icon="media-play" data-l10n-id="overlayMenu-media"></li>
+            <li id="overlay-menu-friends" data-icon="user" data-l10n-id="overlayMenu-friends"></li>
+            <li id="overlay-menu-settings" data-icon="settings" data-l10n-id="overlayMenu-settings"></li>
+            <li id="overlay-menu-power" data-icon="power" data-l10n-id="overlayMenu-power"></li>
+          </ul>
+        </div>
+        <div id="overlay-menu-deadzone"></div>
+      </div>
+    </div>
+
+    <div id="controller-hints"></div>
+    <div id="cursor"></div>
+  </div>
+</body>
+</html>

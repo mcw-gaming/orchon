@@ -1,0 +1,73 @@
+#home-installed {
+  width: 100%;
+  height: 50vh;
+  margin: 0;
+  padding: 5vh;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+.card {
+  height: 40vh;
+  aspect-ratio: 3 / 5;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.25);
+  position: relative;
+  display: inline-block;
+  margin-inline-end: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.025);
+  box-shadow: 0 2.5vh 5vh rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+.card:first-child {
+  height: 40vh;
+  aspect-ratio: 9 / 5;
+}
+
+.card > .keyart {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card > .content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  color: #fff;
+  background: linear-gradient(to bottom, transparent, rgba(51,51,51,0.75));
+}
+
+.card > .content .name {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card > .content .description {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

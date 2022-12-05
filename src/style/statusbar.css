@@ -1,0 +1,23 @@
+#statusbar {
+  background: #000000;
+}
+
+.statusbar {
+  height: 4rem;
+  display: flex;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.statusbar > div {
+  padding: 0 1rem;
+  height: 4rem;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.statusbar > div[data-icon]:before {
+  font-size: 2rem;
+}
