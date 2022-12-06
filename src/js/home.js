@@ -1,8 +1,7 @@
-const fs = require('fs');
-
 (function(exports) {
   'use strict';
 
+  const fs = require('fs');
   const { exec } = require('child_process');
 
   function runCommand(shellCommand) {
@@ -13,10 +12,23 @@ const fs = require('fs');
     });
   }
 
+  var LAUNCH_APP_SOUND = new Audio('resources/sounds/launch.wav');
+
   var home = document.getElementById('home');
   var appsContainer = document.getElementById('home-installed');
 
   home.classList.add('visible');
+  var homeButton = document.getElementById('overlay-menu-home');
+  homeButton.addEventListener('click', () => {
+    home.src = 'https://orchidfoss.github.io/webstore/index.html?#';
+    openView(home);
+    exports.controller = {};
+    refreshControls();
+
+    var screen = document.getElementById('screen');
+    screen.style.setProperty('--theme-color', null);
+    screen.classList.remove('light');
+  });
 
   fs.readdir('/opt/orchid/installed', (error, apps) => {
     if (error) {
@@ -32,6 +44,7 @@ const fs = require('fs');
       element.addEventListener('click', () => {
         console.log('Running /opt/orchid/installed/' + app);
         runCommand('cd /opt/orchid/installed/' + app + '; ' + manifestJson.path + ' ' + manifestJson.arguments);
+        LAUNCH_APP_SOUND.play();
       });
       appsContainer.appendChild(element);
 

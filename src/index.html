@@ -13,15 +13,21 @@
   <link rel="stylesheet" href="style/controller.css">
   <link rel="stylesheet" href="style/overlay_menu.css">
   <link rel="stylesheet" href="style/views.css">
+  <link rel="stylesheet" href="style/notifications.css">
   <link rel="stylesheet" href="style/home.css">
+  <link rel="stylesheet" href="style/browser.css">
 
   <script src="lib/gamecontroller.js"></script>
+  <script type="module" src="services/script.js"></script>
+  <script defer src="js/light_or_dark.js"></script>
   <script defer src="js/statusbar.js"></script>
+  <script defer src="js/notifications.js"></script>
   <script defer src="js/controller.js"></script>
   <script defer src="js/overlay_menu.js"></script>
   <script defer src="js/views.js"></script>
   <script defer src="js/home.js"></script>
   <script defer src="js/webstore.js"></script>
+  <script defer src="js/browser.js"></script>
 
   <!-- Localization -->
   <script src="js/l10n.js"></script>
@@ -37,14 +43,48 @@
         <div data-icon="battery-70"></div>
         <div data-icon="wifi"></div>
       </div>
+      <div id="profile">
+        <img src="" alt="" id="profile-avatar">
+        <div id="profile-username"></div>
+      </div>
     </div>
 
     <div id="content">
       <div id="views">
         <div id="home" class="view">
+          <header data-l10n-id="installed"></header>
           <div id="home-installed"></div>
+
+          <header data-l10n-id="friends" class="comms"></header>
         </div>
+
         <webview id="webstore" class="view"></webview>
+
+        <div id="browser" class="view chrome">
+          <header class="header">
+            <ul id="browser-tab-list" class="tab-list"></ul>
+            <button id="browser-newtab" data-icon="add"></button>
+          </header>
+          <div id="browser-navbar" class="controls">
+            <button id="browser-navbar-back" data-icon="browser-back"></button>
+            <button id="browser-navbar-forward" data-icon="browser-forward"></button>
+            <button id="browser-navbar-reload" data-icon="browser-reload"></button>
+            <button id="browser-navbar-home" data-icon="browser-home"></button>
+
+            <form action="" id="browser-urlbar" class="urlbar">
+              <button id="browser-urlbar-security" data-icon="browser-ssl-broken"></button>
+              <input type="text" id="browser-urlbar-input">
+              <button type="submit" data-icon="forward"></button>
+              <button id="browser-urlbar-bookmark" data-icon="bookmark"></button>
+            </form>
+
+            <button id="browser-navbar-profile" class="profile">
+              <img src="" alt="" id="browser-navbar-profile-avatar">
+            </button>
+            <button id="browser-navbar-options" data-icon="browser-options"></button>
+          </div>
+          <section id="browser-webviews" class="webviews"></section>
+        </div>
       </div>
 
       <div id="overlay-menu">
@@ -61,6 +101,14 @@
           </ul>
         </div>
         <div id="overlay-menu-deadzone"></div>
+      </div>
+
+      <div id="notification">
+        <img src="" alt="" id="notification-icon">
+        <div class="content">
+          <div id="notification-title"></div>
+          <div id="notification-detail"></div>
+        </div>
       </div>
     </div>
 

@@ -2,6 +2,7 @@
   'use strict';
 
   const { exec } = require('child_process');
+  const { ipcRenderer } = require('electron');
 
   function runCommand(shellCommand) {
     exec(shellCommand, (error, stdout, stderr) => {
@@ -11,6 +12,7 @@
     });
   }
 
+  var isGameOpen = false;
   exports.controller = {};
   exports.controller_hinted = {};
   var cursorPos = {
@@ -21,12 +23,18 @@
 
   var views = document.getElementById('views');
   var cursorElement = document.getElementById('cursor');
+  var overlayMenu = document.getElementById('overlay-menu');
+  var views = document.getElementById('views');
+
   function moveCursor(x, y) {
     cursorPos = {
       x: cursorPos.x + (x * momentum),
       y: cursorPos.y + (y * momentum)
     }
-    momentum += 0.1;
+    momentum = momentum * 1.025;
+    if (momentum >= 45) {
+      momentum = 45;
+    }
 
     if (cursorPos.x <= 0) {
       cursorPos.x = 0;
@@ -87,11 +95,41 @@
 
   // Keyboard
   function key(key) {
-    runCommand(`xdotool mousedown ${key}`);
+    runCommand(`xdotool key ${key}`);
   }
 
+  exports.triggerHaptics = (duration, power, gamepad = gameControl.gamepads['0']) => {
+    gamepad.hapticActuator.playEffect('dual-rumble', {
+      startDelay: 0,
+      duration: duration,
+      weakMagnitude: power,
+      strongMagnitude: power,
+    });
+  };
+
   gameControl.on('connect', function(gamepad) {
+    OrchidNotification.send({
+      icon: 'images/system_256.png',
+      title: navigator.mozL10n.get('controller-paired')
+    });
+
     exports.refreshControls = () => {
+      exports.controller['power'] = () => {
+        overlayMenu.classList.toggle('visible');
+        views.classList.toggle('hidden');
+
+        if (isGameOpen) {
+          if (overlayMenu.classList.contains('visible')) {
+            ipcRenderer.send('orchidgamedeck-focus');
+          } else {
+            ipcRenderer.send('orchidgamedeck-blur');
+          }
+        } else {
+          ipcRenderer.send('orchidgamedeck-focus');
+        }
+        triggerHaptics(100, 1);
+      };
+
       controller['l1'] = wheelUp;
       controller['r1'] = wheelDown;
       controller['l2'] = contextMenu;
@@ -130,6 +168,13 @@
     };
 
     refreshControls();
+  });
+
+  gameControl.on('disconnect', function(gamepad) {
+    OrchidNotification.send({
+      icon: 'images/system_256.png',
+      title: navigator.mozL10n.get('controller-unpaired')
+    });
   });
 
   var controllerHints = document.getElementById('controller-hints');

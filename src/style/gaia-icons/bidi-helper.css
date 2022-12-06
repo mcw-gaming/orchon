@@ -42,3 +42,11 @@ html[dir="rtl"] [data-icon="send"]:before {
 html[dir="rtl"] [data-icon="edit"]:before {
   transform: rotate(180deg);
 }
+
+html[dir="rtl"] [data-icon="browser-back"]:before {
+  transform: rotate(180deg);
+}
+
+html[dir="rtl"] [data-icon="browser-forward"]:before {
+  transform: rotate(180deg);
+}

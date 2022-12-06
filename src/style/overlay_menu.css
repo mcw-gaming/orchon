@@ -9,6 +9,7 @@
   transition: all 0.2s ease;
   opacity: 0;
   visibility: hidden;
+  z-index: 12;
 }
 
 #overlay-menu.visible {

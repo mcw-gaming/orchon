@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -13,11 +13,13 @@ const createWindow = () => {
     height: 600,
     transparent: true,
     fullscreen: true,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: false,
       nodeIntegration: true,
-      webviewTag: true
+      webviewTag: true,
+      enableRemoteModule: true
     }
   });
 
@@ -27,6 +29,15 @@ const createWindow = () => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  ipcMain.on('orchidgamedeck-focus', () => {
+    mainWindow.minimize();
+    mainWindow.focus();
+  });
+
+  ipcMain.on('orchidgamedeck-blur', () => {
+    mainWindow.minimize();
+  });
 };
 
 // This method will be called when Electron has finished

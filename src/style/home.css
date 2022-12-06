@@ -1,8 +1,38 @@
+#home > header {
+  margin: 0;
+  padding: 0 5vh;
+  line-height: 5vh;
+  box-sizing: border-box;
+  color: transparent;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #00a0e8, #00ddff);
+  -webkit-background-clip: text;
+}
+
+#home > header.comms {
+  margin: 0;
+  padding: 0 5vh;
+  line-height: 5vh;
+  box-sizing: border-box;
+  color: transparent;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #604080, #ff6040);
+  -webkit-background-clip: text;
+}
+
+#home > header:first-child {
+  padding: 5vh 5vh 0;
+}
+
 #home-installed {
   width: 100%;
-  height: 50vh;
+  height: calc(45vh + 1rem);
   margin: 0;
-  padding: 5vh;
+  padding: 1rem 5vh 5vh;
   box-sizing: border-box;
   overflow-y: hidden;
   overflow-x: auto;
@@ -23,7 +53,7 @@
 }
 
 .card:hover {
-  transform: scale(1.025);
+  transform: translateY(-0.2rem);
   box-shadow: 0 2.5vh 5vh rgba(0,0,0,0.5);
   z-index: 1;
 }

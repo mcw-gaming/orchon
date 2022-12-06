@@ -15,7 +15,7 @@
 }
 
 html, body {
-  --safezone-width: 0;
+  --safezone-width: 0px;
 
   margin: 0;
   padding: 0;
@@ -41,6 +41,7 @@ html, body {
   border-top-width: calc((var(--safezone-width) / 4) * 3);
   border-bottom-width: calc((var(--safezone-width) / 4) * 3);
   box-sizing: border-box;
+  margin: 0;
 }
 
 #content {

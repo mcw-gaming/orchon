@@ -1,8 +1,9 @@
 #controller-hints {
-  background: #000000;
+  background: var(--theme-color, #101214);
   display: flex;
   padding: 0 1rem;
   box-sizing: border-box;
+  transition: background 0.3s ease;
 }
 
 .controller-hint {
@@ -35,5 +36,9 @@
   margin-inline-end: 1rem;
   font-size: 1.6rem;
   font-weight: bold;
-  color: #fff;
+  color: #e7e7e7;
+}
+
+#screen.light .controller-hint > div {
+  color: #333;
 }
