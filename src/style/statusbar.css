@@ -8,6 +8,14 @@
   display: flex;
   padding: 0 1rem;
   box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#screen.loaded .statusbar {
+  visibility: visible;
+  opacity: 1;
 }
 
 .statusbar > div {
@@ -25,4 +33,35 @@
 
 .statusbar > div[data-icon]:before {
   font-size: 2rem;
+}
+
+#statusbar-battery {
+  width: 2rem;
+  position: relative;
+}
+
+#statusbar-battery::after {
+  content: '';
+  position: absolute;
+  left: 1.23rem;
+  top: 1.6rem;
+  width: calc(1.3rem * var(--progress));
+  height: 0.8rem;
+  border-radius: 0.1rem;
+  background: #e7e7e7;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.1, 1);
+}
+
+#statusbar-battery.charging::after {
+  opacity: 0.5;
+  animation: battery-charging 1s cubic-bezier(0.2, 0.9, 0.1, 1) infinite;
+}
+
+@keyframes battery-charging {
+  from {
+    width: 0;
+  }
+  to {
+    width: calc(1.3rem * var(--progress));
+  }
 }

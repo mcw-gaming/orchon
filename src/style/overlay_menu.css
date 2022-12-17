@@ -59,15 +59,14 @@ html[dir="rtl"] #overlay-menu-deadzone {
 
 #overlay-menu-options > header {
   width: 100%;
-  height: 3rem;
-  line-height: 3rem;
+  height: 4rem;
+  line-height: 4rem;
   padding: 0 3rem;
   box-sizing: border-box;
   color: transparent;
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 2rem;
   text-transform: uppercase;
-  background: linear-gradient(to right, #00a0e8, #00ddff);
+  background: linear-gradient(to right, #0061e0, #00ddff);
   -webkit-background-clip: text;
 }
 
@@ -87,7 +86,7 @@ html[dir="rtl"] #overlay-menu-deadzone {
   height: 4.8rem;
   line-height: 4.8rem;
   border-radius: 1rem;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #fff;
   position: relative;
   transition: background 0.15s ease;
@@ -123,8 +122,16 @@ html[dir="rtl"] #overlay-menu-deadzone {
 #overlay-menu-options > ul li:active + li:after,
 #overlay-menu-options > ul li.focus + li:after,
 #overlay-menu-options > ul li.active + li:after,
-#overlay-menu-options > ul li:first-child:after {
+#overlay-menu-options > ul li:first-child:after,
+#overlay-menu-options > ul li.selected:after,
+#overlay-menu-options > ul li.selected + li:after {
   display: none;
+}
+
+#overlay-menu-options > ul li.selected {
+  background: rgba(0, 221, 255, 0.25);
+  color: #00ddff;
+  font-weight: bold;
 }
 
 #overlay-menu-options > ul li[data-icon] {

@@ -12,15 +12,34 @@
     });
   }
 
+  var BACKGROUND_MUSIC = new Audio('resources/sounds/home_music.mp3');
   var LAUNCH_APP_SOUND = new Audio('resources/sounds/launch.wav');
 
   var home = document.getElementById('home');
   var appsContainer = document.getElementById('home-installed');
+  window.openView(home);
 
-  home.classList.add('visible');
+  BACKGROUND_MUSIC.play();
+  BACKGROUND_MUSIC.onended = () => {
+    BACKGROUND_MUSIC.play();
+  };
+  function audioTicker() {
+    requestAnimationFrame(audioTicker);
+
+    if (home.classList.contains('visible')) {
+      if (BACKGROUND_MUSIC.volume <= 1 && BACKGROUND_MUSIC.volume !== 1) {
+        BACKGROUND_MUSIC.volume += 0.1;
+      }
+    } else {
+      if (BACKGROUND_MUSIC.volume >= 0.1) {
+        BACKGROUND_MUSIC.volume -= 0.1;
+      }
+    }
+  }
+  audioTicker();
+
   var homeButton = document.getElementById('overlay-menu-home');
   homeButton.addEventListener('click', () => {
-    home.src = 'https://orchidfoss.github.io/webstore/index.html?#';
     openView(home);
     exports.controller = {};
     refreshControls();

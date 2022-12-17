@@ -16,24 +16,26 @@
   exports.controller = {};
   exports.controller_hinted = {};
   var cursorPos = {
-    x: 0,
-    y: 0
+    x: (window.innerWidth / 2),
+    y: (window.innerHeight / 2)
   }
-  var momentum = 1;
+  var lastCursorPos = {
+    x: (window.innerWidth / 2),
+    y: (window.innerHeight / 2)
+  }
 
   var views = document.getElementById('views');
   var cursorElement = document.getElementById('cursor');
   var overlayMenu = document.getElementById('overlay-menu');
   var views = document.getElementById('views');
 
-  function moveCursor(x, y) {
+  function moveCursor(gamepad) {
+    var x = parseFloat(gamepad.axeValues[1][0]) * (window.devicePixelRatio * 24);
+    var y = parseFloat(gamepad.axeValues[1][1]) * (window.devicePixelRatio * 24);
+
     cursorPos = {
-      x: cursorPos.x + (x * momentum),
-      y: cursorPos.y + (y * momentum)
-    }
-    momentum = momentum * 1.025;
-    if (momentum >= 45) {
-      momentum = 45;
+      x: cursorPos.x + x,
+      y: cursorPos.y + y
     }
 
     if (cursorPos.x <= 0) {
@@ -52,28 +54,12 @@
 
     cursorElement.style.left = cursorPos.x + 'px';
     cursorElement.style.top = cursorPos.y + 'px';
-    runCommand(`xdotool mousemove ${cursorPos.x + window.screenLeft} ${cursorPos.y + window.screenTop}`);
-
-    if (x !== 0) {
-      if (x >= 0) {
-        cursorElement.style.transform = 'rotate(' + (momentum * 3) + 'deg)';
-      } else {
-        cursorElement.style.transform = 'rotate(' + ((momentum * 3) * -1) + 'deg)';
+    if (lastCursorPos !== cursorPos) {
+      if (x !== 0 || y !== 0) {
+        runCommand(`xdotool mousemove ${cursorPos.x + window.screenLeft} ${cursorPos.y + window.screenTop}`);
       }
+      lastCursorPos = cursorPos;
     }
-
-    if (y !== 0) {
-      if (y >= 0) {
-        cursorElement.style.transform = 'rotate(' + ((momentum * 3) * -1) + 'deg)';
-      } else {
-        cursorElement.style.transform = 'rotate(' + (momentum * 3) + 'deg)';
-      }
-    }
-  }
-
-  function stopCursor() {
-    momentum = 1;
-    cursorElement.style.transform = 'rotate(0deg)';
   }
 
   // Mouse
@@ -140,24 +126,22 @@
       gamepad.after('button1', controller_hinted['button1']);
 
       // Mouse controls
-      gamepad.on('left1', () => moveCursor(-1, 0));
-      gamepad.on('right1', () => moveCursor(1, 0));
-      gamepad.on('up1', () => moveCursor(0, -1));
-      gamepad.on('down1', () => moveCursor(0, 1));
-      gamepad.on('left1 up1', () => moveCursor(-1, -1));
-      gamepad.on('right1 up1', () => moveCursor(1, -1));
-      gamepad.on('left1 down1', () => moveCursor(-1, 1));
-      gamepad.on('right1 down1', () => moveCursor(1, 1));
+      window.addEventListener('gc.analog.start', function(event) {
+        var stick = event.detail;
+        console.log(stick);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        moveCursor(gamepad);
+      }
+      animate();
 
       gamepad.after('left0', () => key('w'));
       gamepad.after('right0', () => key('a'));
       gamepad.after('up0', () => key('s'));
       gamepad.after('down0', () => key('d'));
-
-      gamepad.after('left1', stopCursor);
-      gamepad.after('right1', stopCursor);
-      gamepad.after('up1', stopCursor);
-      gamepad.after('down1', stopCursor);
 
       gamepad.on('l1', controller_hinted['l1']);
       gamepad.on('r1', controller_hinted['r1']);

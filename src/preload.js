@@ -9,18 +9,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   `;
   document.head.appendChild(style);
-
-  const Keyboard = window.SimpleKeyboard.default;
-  const myKeyboard = new Keyboard({
-    onChange: input => onChange(input)
-  });
-
-  function onChange(input) {
-    var inputbox = document.querySelector("input[type=text]:focus");
-    inputbox.value = input;
-    console.log("Input changed", input);
-    inputbox.onblur = () => {
-      inputbox.focus();
-    }
-  }
 });

@@ -3,12 +3,19 @@
   display: flex;
   padding: 0 1rem;
   box-sizing: border-box;
-  transition: background 0.3s ease;
 }
 
 .controller-hint {
   display: flex;
   height: 4rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#screen.loaded .controller-hint {
+  visibility: visible;
+  opacity: 1;
 }
 
 .controller-hint.menu {

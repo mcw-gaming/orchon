@@ -186,7 +186,7 @@ html[dir="rtl"] .tab-list .tab .title {
 }
 
 .controls .urlbar:focus-within {
-  outline: solid 0.1rem #00a0e8;
+  outline: solid 0.1rem #0061e0;
 }
 
 .controls .urlbar > button {

@@ -16,32 +16,41 @@
   <link rel="stylesheet" href="style/notifications.css">
   <link rel="stylesheet" href="style/home.css">
   <link rel="stylesheet" href="style/browser.css">
+  <link rel="stylesheet" href="style/splashscreen.css">
+  <link rel="stylesheet" href="dist/style.css">
 
   <script src="lib/gamecontroller.js"></script>
+  <script src="lib/createjs.min.js"></script>
+  <script src="lib/TweenMax.min.js"></script>
   <script type="module" src="services/script.js"></script>
   <script defer src="js/light_or_dark.js"></script>
+  <script defer src="dist/script.js"></script>
+  <script defer src="js/main.js"></script>
   <script defer src="js/statusbar.js"></script>
   <script defer src="js/notifications.js"></script>
   <script defer src="js/controller.js"></script>
   <script defer src="js/overlay_menu.js"></script>
   <script defer src="js/views.js"></script>
   <script defer src="js/home.js"></script>
+  <script defer src="js/home/background.js"></script>
   <script defer src="js/webstore.js"></script>
   <script defer src="js/browser.js"></script>
+  <script defer src="js/power.js"></script>
 
   <!-- Localization -->
   <script src="js/l10n.js"></script>
   <meta name="defaultLanguage" content="en-US">
   <meta name="availableLanguages" content="af, ar, da, de, el, en-US, es, fi, fr, ga, he, hi, hu, id, ja, ko, ku, lv, nl, no, pt, zh">
   <link rel="localization" href="locales/main.{locale}.properties">
+  <link rel="localization" href="locales/settings.{locale}.properties">
 </head>
 <body>
   <div id="screen">
     <div id="statusbar">
       <div class="statusbar">
         <div id="statusbar-time"></div>
-        <div data-icon="battery-70"></div>
-        <div data-icon="wifi"></div>
+        <div id="statusbar-battery"></div>
+        <div id="statusbar-wifi"></div>
       </div>
       <div id="profile">
         <img src="" alt="" id="profile-avatar">
@@ -52,10 +61,14 @@
     <div id="content">
       <div id="views">
         <div id="home" class="view">
-          <header data-l10n-id="installed"></header>
-          <div id="home-installed"></div>
+          <canvas id="projector">Your browser does not support the Canvas element.</canvas>
+          <main>
+            <header data-l10n-id="installed"></header>
+            <div id="home-installed"></div>
 
-          <header data-l10n-id="friends" class="comms"></header>
+            <header data-l10n-id="friends" class="comms"></header>
+            <div id="home-friends"></div>
+          </main>
         </div>
 
         <webview id="webstore" class="view"></webview>
@@ -85,6 +98,13 @@
           </div>
           <section id="browser-webviews" class="webviews"></section>
         </div>
+
+        <div id="settings" class="view">
+          <div class="sidebar">
+            <header data-l10n-id="networkAndConnectivity"></header>
+          </div>
+          <div class="content"></div>
+        </div>
       </div>
 
       <div id="overlay-menu">
@@ -110,10 +130,20 @@
           <div id="notification-detail"></div>
         </div>
       </div>
+
+      <div id="context-menu">
+        <div id="context-menu-content">
+          <div id="context-menu-content-items"></div>
+        </div>
+      </div>
     </div>
 
     <div id="controller-hints"></div>
     <div id="cursor"></div>
+    <div id="splashscreen">
+      <div class="logo"></div>
+      <div class="notice" data-l10n-id="startup-notice"></div>
+    </div>
   </div>
 </body>
 </html>

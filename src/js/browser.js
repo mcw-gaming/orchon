@@ -6,7 +6,6 @@
   var browser = document.getElementById('browser');
   var browserButton = document.getElementById('overlay-menu-browser');
   browserButton.addEventListener('click', () => {
-    OrchidBrowser.init();
     openView(browser);
 
     exports.controller = {};
@@ -200,5 +199,6 @@
           break;
       }
     }
-  }
+  };
+  OrchidBrowser.init();
 })(window);

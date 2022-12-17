@@ -1,4 +1,21 @@
-#home > header {
+#home > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #191d1e 50%, #283139 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191d1e', endColorstr='#283139',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background-attachment: fixed;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, white, transparent);
+}
+
+#home main {
+  z-index: 1;
+  position: relative;
+}
+
+#home main > header {
   margin: 0;
   padding: 0 5vh;
   line-height: 5vh;
@@ -7,11 +24,11 @@
   font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(to right, #00a0e8, #00ddff);
+  background: linear-gradient(to right, #0061e0, #00ddff);
   -webkit-background-clip: text;
 }
 
-#home > header.comms {
+#home main > header.comms {
   margin: 0;
   padding: 0 5vh;
   line-height: 5vh;
@@ -24,7 +41,7 @@
   -webkit-background-clip: text;
 }
 
-#home > header:first-child {
+#home main > header:first-child {
   padding: 5vh 5vh 0;
 }
 
@@ -49,6 +66,7 @@
   position: relative;
   display: inline-block;
   margin-inline-end: 1.5rem;
+  background: #a6a6a6;
   transition: all 0.3s ease;
 }
 
